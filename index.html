@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Miranda Abrams — Computer Science student at Gwynedd Mercy University focused on cybersecurity, network security, and IT operations. Incoming Cyber Operations Intern at NIWC Pacific." />
+<meta name="author" content="Miranda Abrams" />
+<meta name="keywords" content="Miranda Abrams, Cybersecurity, Computer Science, NIWC Pacific, Gwynedd Mercy University, Network Security, Portfolio" />
+
+<!-- Open Graph / social -->
+<meta property="og:title" content="Miranda Abrams — Cybersecurity & CS Portfolio" />
+<meta property="og:description" content="CS Student @ GMercyU | Incoming Cyber Operations Intern @ NIWC Pacific" />
+<meta property="og:type" content="website" />
+
+<title>Miranda Abrams — Cybersecurity & CS Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- Reset & base ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0e1a;
+    --bg-2: #0f1426;
+    --bg-3: #161c33;
+    --panel: rgba(255,255,255,0.04);
+    --panel-border: rgba(255,255,255,0.08);
+    --text: #e6eaf3;
+    --text-dim: #9aa3b8;
+    --text-faint: #6b7388;
+    --accent: #6ee7b7;          /* mint green */
+    --accent-2: #60a5fa;        /* blue */
+    --accent-3: #c084fc;        /* purple */
+    --warn: #fbbf24;
+    --maxw: 1100px;
+    --radius: 14px;
+    --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; transition: color .2s ease, opacity .2s ease; }
+  a:hover { color: #b6f7d6; }
+  ::selection { background: rgba(110,231,183,0.3); color: #fff; }
+
+  /* ---------- Background grid / glow ---------- */
+  .bg-decor {
+    position: fixed; inset: 0; z-index: -1; overflow: hidden;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(96,165,250,0.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(192,132,252,0.14), transparent 60%),
+      radial-gradient(700px 400px at 100% 90%, rgba(110,231,183,0.12), transparent 60%),
+      var(--bg);
+  }
+  .bg-decor::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0; position: relative; }
+  section + section { border-top: 1px solid rgba(255,255,255,0.04); }
+
+  /* ---------- Navbar ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(10,14,26,0.65);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-inner {
+    max-width: var(--maxw); margin: 0 auto;
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; letter-spacing: 0.5px; color: var(--text);
+  }
+  .brand .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+  .brand code { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.95rem; }
+  nav ul { display: flex; gap: 28px; list-style: none; }
+  nav a {
+    color: var(--text-dim); font-size: 0.92rem; font-weight: 500;
+    position: relative; padding: 6px 0;
+  }
+  nav a:hover { color: var(--text); }
+  nav a::after {
+    content: ""; position: absolute; left: 0; bottom: 0;
+    width: 0; height: 2px; background: var(--accent);
+    transition: width .25s ease;
+  }
+  nav a:hover::after { width: 100%; }
+  .nav-toggle { display: none; background: none; border: 0; color: var(--text); font-size: 1.4rem; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: 110px; padding-bottom: 80px; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+    color: var(--accent);
+    padding: 6px 12px; border: 1px solid rgba(110,231,183,0.3);
+    border-radius: 999px; background: rgba(110,231,183,0.06);
+  }
+  .eyebrow .pulse {
+    width: 8px; height: 8px; background: var(--accent); border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(110,231,183,0.7);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(110,231,183,0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(110,231,183,0); }
+    100% { box-shadow: 0 0 0 0 rgba(110,231,183,0); }
+  }
+  h1.title {
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 1.08;
+    font-weight: 800;
+    margin: 18px 0 14px;
+    letter-spacing: -0.02em;
+  }
+  .title .grad {
+    background: linear-gradient(120deg, var(--accent), var(--accent-2) 60%, var(--accent-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .subtitle {
+    font-size: 1.15rem; color: var(--text-dim); max-width: 560px;
+    margin-bottom: 28px;
+  }
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    color: var(--text-faint); font-size: 0.92rem;
+    margin-bottom: 32px;
+  }
+  .meta-row span { display: inline-flex; align-items: center; gap: 6px; }
+  .meta-row svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: 10px;
+    font-weight: 600; font-size: 0.95rem;
+    border: 1px solid transparent;
+    cursor: pointer; transition: transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: var(--accent); color: #06251a;
+  }
+  .btn-primary:hover { background: #b6f7d6; color: #06251a; }
+  .btn-ghost {
+    background: transparent; color: var(--text);
+    border-color: rgba(255,255,255,0.18);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- Terminal card ---------- */
+  .terminal {
+    background: linear-gradient(180deg, rgba(22,28,51,0.95), rgba(15,20,38,0.95));
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.88rem;
+  }
+  .terminal-head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; background: rgba(0,0,0,0.25);
+    border-bottom: 1px solid var(--panel-border);
+  }
+  .dot-r { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r.red { background: #ff5f56; }
+  .dot-r.yel { background: #ffbd2e; }
+  .dot-r.grn { background: #27c93f; }
+  .terminal-title {
+    margin-left: 10px; color: var(--text-faint); font-size: 0.8rem;
+  }
+  .terminal-body { padding: 22px 20px; color: #cdd6f4; }
+  .terminal-body .line { margin-bottom: 8px; }
+  .term-prompt { color: var(--accent); }
+  .term-comment { color: var(--text-faint); }
+  .term-key { color: var(--accent-2); }
+  .term-str { color: #fbbf24; }
+  .cursor {
+    display: inline-block; width: 8px; height: 1.05em;
+    background: var(--accent); vertical-align: -2px;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- Section heads ---------- */
+  .section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent); font-size: 0.95rem;
+  }
+  .section-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700; letter-spacing: -0.01em;
+  }
+  .section-rule {
+    flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.18), transparent);
+    margin-left: 8px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 48px;
+  }
+  .about p { color: var(--text-dim); margin-bottom: 18px; }
+  .about p strong { color: var(--text); font-weight: 600; }
+  .focus-card {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius); padding: 22px;
+  }
+  .focus-card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+  .focus-list { list-style: none; }
+  .focus-list li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 0;
+    color: var(--text-dim); font-size: 0.93rem;
+  }
+  .focus-list li::before {
+    content: ">"; color: var(--accent); font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+  }
+
+  /* ---------- Experience timeline ---------- */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: ""; position: absolute;
+    left: 8px; top: 6px; bottom: 6px; width: 2px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+  }
+  .job { position: relative; padding-bottom: 36px; }
+  .job:last-child { padding-bottom: 0; }
+  .job::before {
+    content: ""; position: absolute;
+    left: -28px; top: 8px;
+    width: 18px; height: 18px;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(110,231,183,0.12);
+  }
+  .job-card {
+    background: var(--panel); border: 1px solid var(--panel-border);
+    border-radius: var(--radius); padding: 22px 24px;
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .job-card:hover { transform: translateX(4px); border-color: rgba(110,231,183,0.3); }
+  .job-head {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 6px;
+  }
+  .job-role { font-size: 1.15rem; font-weight: 600; }
+  .job-date {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-faint); font-size: 0.85rem;
+  }
+  .job-org { color: var(--accent-2); font-size: 0.95rem; margin-bottom: 12px; }
+  .job-card ul { padding-left: 18px; }
+  .job-card li { color: var(--text-dim); padding: 3px 0; font-size: 0.94rem; }
+  .job-card li::marker { color: var(--accent); }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem; padding: 4px 10px;
+    background: rgba(96,165,250,0.08);
+    color: var(--accent-2);
+    border-radius: 6px;
+    border: 1px solid rgba(96,165,250,0.18);
+  }
+
+  /* ---------- Projects ---------- */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+  }
+  .project {
+    background: var(--panel); border: 1px solid var(--panel-border);
+    border-radius: var(--radius); padding: 24px;
+    display: flex; flex-direction: column;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .project:hover {
+    transform: translateY(-4px);
+    border-color: rgba(110,231,183,0.3);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.3);
+  }
+  .project-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: grid; place-items: center;
+    background: rgba(110,231,183,0.12);
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .project-icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; }
+  .project h3 { font-size: 1.2rem; margin-bottom: 8px; }
+  .project p { color: var(--text-dim); font-size: 0.93rem; flex: 1; margin-bottom: 16px; }
+  .project-foot {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .project-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem; color: var(--accent);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .project-link:hover { gap: 10px; }
+
+  /* ---------- Skills ---------- */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+  }
+  .skill-cat {
+    background: var(--panel); border: 1px solid var(--panel-border);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .skill-cat h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .skill-cat h3 svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 6px 12px; font-size: 0.85rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; color: var(--text);
+    transition: all .2s ease;
+  }
+  .chip:hover {
+    background: rgba(110,231,183,0.1);
+    border-color: rgba(110,231,183,0.3);
+    color: var(--accent);
+  }
+
+  /* ---------- Education / Certs ---------- */
+  .edu-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px;
+  }
+  .edu-card, .cert-card {
+    background: var(--panel); border: 1px solid var(--panel-border);
+    border-radius: var(--radius); padding: 24px;
+  }
+  .edu-card h3 { font-size: 1.15rem; margin-bottom: 4px; }
+  .edu-card .school { color: var(--accent-2); margin-bottom: 10px; }
+  .edu-card .meta { color: var(--text-faint); font-size: 0.9rem; font-family: 'JetBrains Mono', monospace; margin-bottom: 14px; }
+  .edu-card ul { padding-left: 18px; }
+  .edu-card li { color: var(--text-dim); font-size: 0.93rem; padding: 3px 0; }
+  .edu-card li::marker { color: var(--accent); }
+
+  .cert-card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+  .cert-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .cert-item:last-child { border-bottom: 0; }
+  .cert-name { font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .cert-iss { color: var(--text-faint); font-size: 0.85rem; }
+
+  /* ---------- Contact ---------- */
+  .contact-card {
+    background: linear-gradient(135deg, rgba(110,231,183,0.05), rgba(96,165,250,0.05));
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 48px 36px;
+    text-align: center;
+  }
+  .contact-card h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 12px; letter-spacing: -0.01em;
+  }
+  .contact-card p { color: var(--text-dim); max-width: 560px; margin: 0 auto 26px; }
+  .contact-links {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 14px;
+  }
+  .contact-links a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: var(--text); font-weight: 500; font-size: 0.95rem;
+  }
+  .contact-links a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .contact-links svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 36px 24px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    color: var(--text-faint);
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  footer .heart { color: var(--accent); }
+
+  /* ---------- Reveal animations ---------- */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    section { padding: 70px 0; }
+    .hero { padding-top: 60px; padding-bottom: 40px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .about-grid { grid-template-columns: 1fr; gap: 28px; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .nav-toggle { display: block; }
+    nav ul {
+      position: absolute; right: 16px; top: 60px;
+      flex-direction: column;
+      background: rgba(15,20,38,0.96);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px; padding: 14px 18px;
+      gap: 14px;
+      display: none;
+      backdrop-filter: blur(10px);
+    }
+    nav ul.open { display: flex; }
+    .timeline { padding-left: 22px; }
+    .job::before { left: -22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-decor"></div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="dot"></span>
+      <code>~/miranda-abrams</code>
+    </a>
+    <button class="nav-toggle" aria-label="menu" id="navToggle">&#9776;</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal">
+        <h1 class="title">Hi, I'm <span class="grad">Miranda Abrams</span>.<br/>I defend the systems people rely on.</h1>
+        <p class="subtitle">
+          Aspiring SOC analyst and Computer Science student at Gwynedd Mercy University —
+          focused on threat detection, vulnerability management, and network security,
+          with hands-on experience running ACAS scans, hardening web applications, and
+          supporting cybersecurity workflows in a federal environment.
+        </p>
+        <div class="meta-row">
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Greater Philadelphia, PA
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+            2x Intern @ NIWC Pacific
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            GMercyU '27 · GPA 3.7
+          </span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">
+            Get in touch
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/miranda-abrams/" target="_blank" rel="noopener">
+            View LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- Terminal card -->
+      <div class="reveal">
+        <div class="terminal">
+          <div class="terminal-head">
+            <span class="dot-r red"></span><span class="dot-r yel"></span><span class="dot-r grn"></span>
+            <span class="terminal-title">whoami.sh</span>
+          </div>
+          <div class="terminal-body">
+            <div class="line"><span class="term-prompt">$</span> <span class="term-comment">// quick scan</span></div>
+            <div class="line"><span class="term-prompt">$</span> cat profile.json</div>
+            <div class="line">{</div>
+            <div class="line">&nbsp;&nbsp;<span class="term-key">"name"</span>: <span class="term-str">"Miranda Abrams"</span>,</div>
+            <div class="line">&nbsp;&nbsp;<span class="term-key">"role"</span>: <span class="term-str">"Aspiring SOC Analyst"</span>,</div>
+            <div class="line">&nbsp;&nbsp;<span class="term-key">"focus"</span>: [<span class="term-str">"cybersecurity"</span>, <span class="term-str">"netsec"</span>],</div>
+            <div class="line">&nbsp;&nbsp;<span class="term-key">"school"</span>: <span class="term-str">"Gwynedd Mercy University"</span>,</div>
+            <div class="line">&nbsp;&nbsp;<span class="term-key">"grad"</span>: <span class="term-str">"May 2027"</span>,</div>
+            <div class="line">&nbsp;&nbsp;<span class="term-key">"status"</span>: <span class="term-str">"open to opportunities"</span></div>
+            <div class="line">}</div>
+            <div class="line"><span class="term-prompt">$</span> <span class="cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">01.</span>
+      <h2 class="section-title">About me</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="about-grid">
+      <div class="about reveal">
+        <p>
+          I'm a junior at <strong>Gwynedd Mercy University</strong> studying Computer
+          and Information Science, with a clear focus on cybersecurity and the systems
+          that keep modern organizations running. My coursework in Systems Analysis,
+          Networking, and IT Security gives me the theory — and my internships are
+          where I'm sharpening it into practice.
+        </p>
+        <p>
+          Last summer I worked as a <strong>Software Developer Intern at NIWC Pacific</strong>,
+          where I built an Angular/TypeScript web app, wired up automated Cypress tests
+          inside a GitLab CI/CD pipeline, and got hands-on with ACAS vulnerability
+          scanning alongside the cybersecurity team. I'm returning this year as a
+          <strong>Cyber Operations Intern</strong>.
+        </p>
+        <p>
+          Alongside school, I work as a <strong>Web Developer for SCHEAP</strong>
+          (Synodality in Catholic Higher Ed in the Archdiocese of Philadelphia),
+          where I maintain a WordPress site serving a multi-university initiative.
+          When I'm not in a terminal, you'll find me running the tech for our
+          National Society of Leadership and Success chapter or co-leading the
+          campus Open Jam Club.
+        </p>
+      </div>
+      <div class="focus-card reveal">
+        <h3>// current focus</h3>
+        <ul class="focus-list">
+          <li>Cybersecurity</li>
+          <li>Network Security</li>
+          <li>IT Operations &amp; Support</li>
+          <li>Vulnerability Management</li>
+          <li>CI/CD &amp; Automation</li>
+          <li>Web Development</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">02.</span>
+      <h2 class="section-title">Experience</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="timeline">
+
+      <div class="job reveal">
+        <div class="job-card">
+          <div class="job-head">
+            <div>
+              <div class="job-role">Cyber Operations Intern <span style="color: var(--warn); font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; margin-left: 8px;">// incoming</span></div>
+              <div class="job-org">Naval Information Warfare Center Pacific (NIWC) · Internship</div>
+            </div>
+            <div class="job-date">Summer 2026</div>
+          </div>
+          <ul>
+            <li>Returning to NIWC Pacific on the cyber operations team, building on last summer's software development internship.</li>
+            <li>Focused on applied cybersecurity work in a federal environment.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Cybersecurity</span>
+            <span class="tag">Cyber Operations</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-card">
+          <div class="job-head">
+            <div>
+              <div class="job-role">Web Developer</div>
+              <div class="job-org">Gwynedd Mercy University / SCHEAP · Part-time</div>
+            </div>
+            <div class="job-date">Sep 2025 — Present</div>
+          </div>
+          <ul>
+            <li>Develop and maintain a WordPress-based website, customizing themes and page layouts using HTML and CSS.</li>
+            <li>Configure and integrate third-party plugins for event management and timeline displays.</li>
+            <li>Implement and troubleshoot external embeds to ensure responsive, full-width functionality across devices.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Web Design</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-card">
+          <div class="job-head">
+            <div>
+              <div class="job-role">Software Developer Intern</div>
+              <div class="job-org">Naval Information Warfare Center Pacific (NIWC) · Internship</div>
+            </div>
+            <div class="job-date">Jun 2025 — Aug 2025</div>
+          </div>
+          <ul>
+            <li>Developed an internal web application using Angular and TypeScript to streamline team workflows.</li>
+            <li>Built automated end-to-end tests with Cypress and integrated them into GitLab CI/CD pipelines.</li>
+            <li>Assisted the cybersecurity team with ACAS vulnerability scanning and reporting.</li>
+            <li>Automated a generative AI pipeline to support data processing and content generation tasks.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Angular</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Cypress</span>
+            <span class="tag">GitLab CI/CD</span>
+            <span class="tag">ACAS</span>
+            <span class="tag">Generative AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="job-card">
+          <div class="job-head">
+            <div>
+              <div class="job-role">Technology Chair</div>
+              <div class="job-org">National Society of Leadership and Success · Volunteer</div>
+            </div>
+            <div class="job-date">Apr 2025 — Present</div>
+          </div>
+          <ul>
+            <li>Provide technical support for chapter events and executive board presentations.</li>
+            <li>Coordinate digital documentation and event registration workflows.</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">IT Support</span>
+            <span class="tag">Event Tech</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">03.</span>
+      <h2 class="section-title">Selected projects</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project reveal">
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>SCHEAP Website</h3>
+        <p>
+          Designed, developed, and maintained the website for the Synodality in
+          Catholic Higher Ed in the Archdiocese of Philadelphia initiative. Manages
+          structure, digital content, and functionality for a multi-university
+          program.
+        </p>
+        <div class="tags" style="margin-bottom: 16px;">
+          <span class="tag">WordPress</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+        <div class="project-foot">
+          <a class="project-link" href="https://scheap.org/" target="_blank" rel="noopener">
+            scheap.org
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text-faint);">2025–2026</span>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></svg>
+        </div>
+        <h3>Internal Web Application (NIWC)</h3>
+        <p>
+          Angular + TypeScript web app built during my summer internship to
+          streamline an internal team process. Backed by automated Cypress tests
+          running in GitLab CI/CD.
+        </p>
+        <div class="tags" style="margin-bottom: 16px;">
+          <span class="tag">Angular</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Cypress</span>
+          <span class="tag">GitLab</span>
+        </div>
+        <div class="project-foot">
+          <span class="project-link" style="color: var(--text-faint);">Internal · NIWC Pacific</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text-faint);">Summer 2025</span>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2v4"/><path d="M12 18v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="m16.24 16.24 2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="m16.24 7.76 2.83-2.83"/></svg>
+        </div>
+        <h3>Generative AI Automation Pipeline</h3>
+        <p>
+          Automated a generative AI workflow during my NIWC internship to speed up
+          data processing and content generation tasks for the team.
+        </p>
+        <div class="tags" style="margin-bottom: 16px;">
+          <span class="tag">Python</span>
+          <span class="tag">Automation</span>
+          <span class="tag">GenAI</span>
+        </div>
+        <div class="project-foot">
+          <span class="project-link" style="color: var(--text-faint);">Internal · NIWC Pacific</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text-faint);">Summer 2025</span>
+        </div>
+      </div>
+
+      <div class="project reveal">
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Vulnerability Scanning &amp; Reporting</h3>
+        <p>
+          Hands-on work with ACAS to perform vulnerability scans, triage findings,
+          and contribute to remediation reporting as part of a federal cybersecurity
+          team.
+        </p>
+        <div class="tags" style="margin-bottom: 16px;">
+          <span class="tag">ACAS</span>
+          <span class="tag">Vuln Mgmt</span>
+          <span class="tag">Reporting</span>
+        </div>
+        <div class="project-foot">
+          <span class="project-link" style="color: var(--text-faint);">Internal · NIWC Pacific</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text-faint);">Summer 2025</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">04.</span>
+      <h2 class="section-title">Skills &amp; toolkit</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-cat reveal">
+        <h3>
+          <svg viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
+          Languages
+        </h3>
+        <div class="chip-row">
+          <span class="chip">TypeScript</span>
+          <span class="chip">Python</span>
+          <span class="chip">C#</span>
+          <span class="chip">C++</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal">
+        <h3>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20"/><path d="M12 2a15 15 0 0 0 0 20"/></svg>
+          Web
+        </h3>
+        <div class="chip-row">
+          <span class="chip">Angular</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">WordPress</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal">
+        <h3>
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Tools
+        </h3>
+        <div class="chip-row">
+          <span class="chip">GitLab</span>
+          <span class="chip">Cypress</span>
+          <span class="chip">ACAS</span>
+          <span class="chip">Kali Linux</span>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal">
+        <h3>
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Security &amp; Concepts
+        </h3>
+        <div class="chip-row">
+          <span class="chip">CI/CD</span>
+          <span class="chip">Vulnerability Scanning</span>
+          <span class="chip">Network Security</span>
+          <span class="chip">Penetration Testing</span>
+          <span class="chip">IT Operations</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION & CERTS ============ -->
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">05.</span>
+      <h2 class="section-title">Education &amp; certifications</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="edu-grid">
+
+      <div class="edu-card reveal">
+        <h3>Bachelor of Science — Computer &amp; Information Science</h3>
+        <div class="school">Gwynedd Mercy University</div>
+        <div class="meta">Aug 2023 – May 2027 · GPA 3.7 / 4.0</div>
+        <ul>
+          <li><strong>Honors:</strong> Dean's List (Spring 2026); Mother Mary Bernard &amp; Kathleen/Alan Owens Scholarships</li>
+          <li><strong>Relevant coursework:</strong> Systems Analysis and Design, Networking, IT Security</li>
+          <li><strong>Activities:</strong> VP of the Open Jam Club; Tech Coordinator, NSLS; Secretary, Creative Arts Club</li>
+          <li><strong>Member:</strong> Alpha Lambda Delta Honor Society</li>
+        </ul>
+      </div>
+
+      <div class="cert-card reveal">
+        <h3>// certifications</h3>
+        <div class="cert-item">
+          <div class="cert-name">Kali Linux Penetration Testing</div>
+          <div class="cert-iss">uCertify · Nov 2025</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-name">Database Fundamentals</div>
+          <div class="cert-iss">uCertify · Apr 2024</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">06.</span>
+      <h2 class="section-title">Get in touch</h2>
+      <span class="section-rule"></span>
+    </div>
+    <div class="contact-card reveal">
+      <h2>Let's build something secure.</h2>
+      <p>
+        I'm always open to chatting about cybersecurity, IT operations, internships,
+        or interesting projects. The fastest way to reach me is email or LinkedIn.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:abrams.m@gmercyu.edu">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          abrams.m@gmercyu.edu
+        </a>
+        <a href="https://www.linkedin.com/in/miranda-abrams/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/miranda-abrams
+        </a>
+        <a href="tel:+14847359476">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (484) 735-9476
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    Built &amp; designed by Miranda Abrams · <span style="color: var(--text);">© <span id="year"></span></span>
+  </div>
+  <div style="margin-top: 6px;">
+    <span class="heart">&lt;/&gt;</span> with HTML, CSS &amp; care.
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  const toggle = document.getElementById('navToggle');
+  const list = document.getElementById('navList');
+  toggle.addEventListener('click', () => list.classList.toggle('open'));
+  list.querySelectorAll('a').forEach(a => a.addEventListener('click', () => list.classList.remove('open')));
+
+  // Scroll-reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
